@@ -72,11 +72,13 @@
 		unsigned int byteIndex = (bytesPerRow * roundf(startPoint.y)) + roundf(startPoint.x) * bytesPerPixel;
         
         unsigned int ocolor = getColorCode(byteIndex, imageData);
-        
-        if (compareColor(ocolor, 0, 0)) {
-            return nil;
-        }
-        
+  
+        // This causes a floodfill with a startPoint pixel on a transparent color pixel to fail (and return nil)
+        //    Removing the block seems to cause no ill effect (TBD).
+        //        if (compareColor(ocolor, 0, 0)) {
+        //            return nil;
+        //        }
+
         //Convert newColor to RGBA value so we can save it to image.
         int newRed, newGreen, newBlue, newAlpha;
         
