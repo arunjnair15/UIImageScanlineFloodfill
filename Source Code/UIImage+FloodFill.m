@@ -64,9 +64,12 @@
                                                      bytesPerRow,
                                                      colorSpace,
                                                      bitmapInfo);
+        CGRect myRect = CGRectMake(0, 0, width, height);
+        CGContextClearRect(context, myRect);
+        
         CGColorSpaceRelease(colorSpace);
         
-        CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
+        CGContextDrawImage(context, myRect, imageRef);
         
         //Get color at start point 
 		unsigned int byteIndex = (bytesPerRow * roundf(startPoint.y)) + roundf(startPoint.x) * bytesPerPixel;
