@@ -45,10 +45,10 @@
         
         NSUInteger width = CGImageGetWidth(imageRef);
         NSUInteger height = CGImageGetHeight(imageRef);
-        
-        unsigned char *imageData = malloc(height * width * 4);
-        
         NSUInteger bytesPerPixel = CGImageGetBitsPerPixel(imageRef) / 8;
+        
+        unsigned char *imageData = malloc(height * width * bytesPerPixel);
+        
         NSUInteger bytesPerRow = CGImageGetBytesPerRow(imageRef);
         NSUInteger bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
         
@@ -393,7 +393,7 @@
                 }
             }
             
-            if (y<height)
+            if ((y+1) < height)
             {
                 byteIndex = (bytesPerRow * roundf(y + 1)) + roundf(x) * bytesPerPixel;
                 color = getColorCode(byteIndex, imageData);
